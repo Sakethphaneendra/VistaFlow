@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h2>Topics</h2>
+    <ul>
+        <% topics.forEach(topic => { %>
+            <li>
+                <strong><%= topic.name %></strong> - <%= topic.subHeading %>
+                <ul>
+                    <% topic.videos.forEach(video => { %>
+                        <li><%= video.name %> (<%= video.tag %>)</li>
+                    <% }) %>
+                </ul>
+            </li>
+        <% }) %>
+    </ul>
+    <a href="/admin/upload-video">Upload Video</a>
+</body>
+</html>

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Videos</title>
-    <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Hosting</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Videos</h1>
+
     <section class="video-section">
         <h2>Beginner Level</h2>
         <div class="video-list">
@@ -14,23 +17,72 @@
                     <source src="" type="video/mp4" class="video-source">
                 </video>
             </div>
-            <!-- Add more video items as needed -->
+            <div class="video-item" data-video-level="beginner">
+                <video controls controlsList="nodownload">
+                    <source src="" type="video/mp4" class="video-source">
+                </video>
+            </div>
         </div>
     </section>
+
+    <section class="video-section">
+        <h2>Intermediate Level</h2>
+        <div class="video-list">
+            <div class="video-item" data-video-level="intermediate">
+                <video controls controlsList="nodownload">
+                    <source src="" type="video/mp4" class="video-source">
+                </video>
+            </div>
+            <div class="video-item" data-video-level="intermediate">
+                <video controls controlsList="nodownload">
+                    <source src="" type="video/mp4" class="video-source">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <h2>Advanced Level</h2>
+        <div class="video-list">
+            <div class="video-item" data-video-level="advanced">
+                <video controls controlsList="nodownload">
+                    <source src="" type="video/mp4" class="video-source">
+                </video>
+            </div>
+            <div class="video-item" data-video-level="advanced">
+                <video controls controlsList="nodownload">
+                    <source src="" type="video/mp4" class="video-source">
+                </video>
+            </div>
+        </div>
+    </section>
+
     <a href="/logout">Logout</a>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const videoItems = document.querySelectorAll('.video-item');
+
             videoItems.forEach(item => {
                 const videoSource = item.querySelector('.video-source');
                 const videoLevel = item.dataset.videoLevel;
+
                 fetch('/generate-token')
-                    .then(response => response.json())
-                    .then(data => {
-                        videoSource.src = `/video?token=${data.token}&level=${videoLevel}`;
-                        item.querySelector('video').load();
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to generate token');
+                        }
+                        return response.json();
                     })
-                    .catch(error => console.error('Error:', error));
+                    .then(data => {
+                        videoSource.src = `/stream-video?video=intro.mp4&topic=nodejs-basics&tag=${videoLevel}&token=${data.token}`;
+                        item.querySelector('video').load();
+                        item.querySelector('video').addEventListener('contextmenu', (e) => e.preventDefault());
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        videoSource.parentElement.parentElement.innerHTML = 'Failed to load video. Please try again.';
+                    });
             });
         });
     </script>

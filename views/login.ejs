@@ -5,6 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        .login-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .login-container input[type="submit"] {
+            width: 100%;
+            background: #007BFF;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background: #0056b3;
+        }
+
+        .login-container p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-container a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -12,10 +83,13 @@
         <form action="/login" method="POST">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
+
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
+
             <input type="submit" value="Login">
         </form>
+        <p>Don't have an account? <a href="/register">Register now</a></p>
     </div>
 </body>
 </html>
